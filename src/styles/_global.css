@@ -1,0 +1,87 @@
+/*
+    Use a more-intuitive box-sizing mod  
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/*
+   Remove default margin
+*/
+* {
+  margin: 0;
+}
+
+html {
+  font-size: var(--font-size-root) !important;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-base);
+  line-height: var(--font-space-line-base);
+  background-color: var(--c-neutral-white);
+}
+
+html {
+  width: 100%;
+  width: 100vw;
+}
+
+html,
+body,
+#__nuxt {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Force vertical scrollbar to be always visible to avoid layout shift while loading the content */
+  overflow-y: scroll;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  /* Prevent arbitrary zooming on mobile devices */
+  touch-action: pan-x pan-y;
+}
+
+/*
+  Improve text rendering
+*/
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/*
+   Improve media defaults
+*/
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+   Remove built-in form typography styles
+*/
+input, button, textarea, select {
+  font: inherit;
+}
+
+/*
+   Avoid text overflows
+*/
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* ::-moz-selection {
+}
+
+::selection { 
+}
+*/

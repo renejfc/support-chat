@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,700&display=swap');
+
+:root {
+  --font-size-root: 62.5%;
+  --font-size-sm: 1.2rem;
+  --font-size-base: 1.6rem;
+  --font-size-md: 2.1rem;
+  
+  --font-family-base: 'Roboto', sans-serif;
+
+  --font-weight-bold: bold;
+  --font-weight-base: normal;
+
+  --font-style-italic: italic;
+
+  --font-space-line-base: 1.5;
+}
