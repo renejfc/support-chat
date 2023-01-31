@@ -3,15 +3,21 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.35.1
   '@pinia/nuxt': ^0.4.6
+  '@types/uuid': ^9.0.0
   eslint: ^8.33.0
   nuxt: ^3.1.1
   nuxt-icon: ^0.2.10
   pinia: ^2.0.29
   typescript: ^4.9.4
+  uuid: ^9.0.0
+
+dependencies:
+  uuid: 9.0.0
 
 devDependencies:
   '@antfu/eslint-config': 0.35.1_zkdaqh7it7uc4cvz2haft7rc6u
   '@pinia/nuxt': 0.4.6_typescript@4.9.4
+  '@types/uuid': 9.0.0
   eslint: 8.33.0
   nuxt: 3.1.1_zkdaqh7it7uc4cvz2haft7rc6u
   nuxt-icon: 0.2.10
@@ -1377,6 +1383,10 @@ packages:
 
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
+    dev: true
+
+  /@types/uuid/9.0.0:
+    resolution: {integrity: sha512-kr90f+ERiQtKWMz5rP32ltJ/BtULDI5RVO0uavn1HQUOwjx0R1h0rnDYNL0CepF1zL5bSY6FISAfd9tOdDhU5Q==}
     dev: true
 
   /@typescript-eslint/eslint-plugin/5.49.0_rsaczafy73x3xqauzesvzbsgzy:
@@ -6377,6 +6387,11 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /uuid/9.0.0:
+    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
+    dev: false
 
   /validate-npm-package-license/3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
