@@ -5,6 +5,11 @@ defineProps<{
   type: string
   placeholder: string
   id: string
+  modelValue: string | null
+}>()
+
+defineEmits<{
+  (e: 'update:modelValue', value: string): void
 }>()
 </script>
 
@@ -22,6 +27,8 @@ defineProps<{
       :name="name"
       class="form__input"
       :placeholder="placeholder"
+      :value="modelValue"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     >
   </div>
 </template>
