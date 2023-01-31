@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <form class="form" @click.prevent>
+  <form class="form" @submit.prevent>
     <h1 class="form__title">
       Log in with your credentials to join the chat.
     </h1>

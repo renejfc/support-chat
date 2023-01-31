@@ -6,8 +6,16 @@ export default defineNuxtConfig({
     '~/styles/tokens/_typography.css',
     '~/styles/_global.css',
   ],
+  imports: {
+    dirs: ['stores'],
+  },
   modules: [
-    '@pinia/nuxt',
+    [
+      '@pinia/nuxt',
+      {
+        autoImports: ['defineStore', 'acceptHMRUpdate', 'useStore'],
+      },
+    ],
     'nuxt-icon',
   ],
 })
