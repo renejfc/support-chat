@@ -1,26 +1,30 @@
-import type { ISession } from '~/types/auth.interface'
+import type { ISession, ISessionResponse } from '~/types/auth.interface'
 
 export const useAuthStore = defineStore('auth', () => {
-  const baseUrl = '/api'
+  const baseUrl = useRuntimeConfig().public.apiBaseUrl
+  const router = useRouter()
+
   const sessionId = useCookie<string | null>('session_id', { maxAge: 3600, default: () => null, sameSite: 'lax' })
   const isLoggedIn = computed(() => !!sessionId.value)
 
   async function login({ username, password }: ISession) {
-    try {
-      const { session_id } = await $fetch(`${baseUrl}/login`, {
+      const { data, error } = await useFetch<ISessionResponse>(`${baseUrl}/login`, {
         method: 'POST',
         body: { username, password },
       })
 
-      sessionId.value = session_id
-    }
-    catch (error) {
-      console.error(error)
-    }
+      if(error.value) {
+        console.error(error.value.message)
+        return
+      }
+
+      sessionId.value = data.value!.session_id
+      router.push({ path: '/chat' })
   }
 
   function logout() {
     sessionId.value = null
+    router.push({ path: '/auth/login' })
   }
 
   return { login, logout, isLoggedIn }

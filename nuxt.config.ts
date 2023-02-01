@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: "/api",
+    }
+  },
   srcDir: 'src/',
   css: [
     '~/styles/tokens/_colors.css',
