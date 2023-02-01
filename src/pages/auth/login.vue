@@ -8,10 +8,30 @@ const credentials = reactive<ISession>({
   password: null,
 })
 
+const shouldValidate = ref(false)
+
+const isValidUsername = isValidField('username')
+const isValidPassword = isValidField('password')
+
+const loginError = auth.authError
+
 async function login() {
   await auth.login({
     username: credentials.username,
     password: credentials.password,
+  })
+}
+
+function onInput(field: 'username' | 'password', value: string) {
+  credentials[field] = value
+  shouldValidate.value = true
+}
+
+function isValidField(field: 'username' | 'password') {
+  return computed(() => {
+    if (!shouldValidate.value)
+      return undefined
+    return credentials[field] !== null && credentials[field]!.length > 3
   })
 }
 </script>
@@ -25,12 +45,14 @@ async function login() {
       <div class="form__inputs">
         <CoreInput
           id="username"
+          :valid="isValidUsername"
           :model-value="credentials.username"
           name="username"
           label="username"
           type="text"
           placeholder="Username"
-          @update:model-value="newValue => credentials.username = newValue"
+          required
+          @update:model-value="value => onInput('username', value)"
         >
           <template #icon>
             <Icon name="ri:user-fill" />
@@ -38,12 +60,14 @@ async function login() {
         </CoreInput>
         <CoreInput
           id="password"
+          :valid="isValidPassword"
+          required
           :model-value="credentials.password"
           name="password"
           label="password"
           type="password"
           placeholder="Password"
-          @update:model-value="newValue => credentials.password = newValue"
+          @update:model-value="value => onInput('password', value)"
         >
           <template #icon>
             <Icon name="ri:lock-fill" />
@@ -52,11 +76,15 @@ async function login() {
       </div>
 
       <div class="pad-x">
-        <CoreButton fluid>
+        <CoreButton :disabled="!(isValidPassword && isValidUsername)" fluid>
           <Icon name="ri:key-2-fill" class="key-icon" />
           LogIn
         </CoreButton>
       </div>
+
+      <p v-if="loginError.code" class="form__error">
+        {{ loginError.message }}
+      </p>
     </form>
   </CoreArea>
 </template>
@@ -72,7 +100,7 @@ async function login() {
   align-items: center;
   flex-direction: column;
   padding-top: 13rem;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   box-shadow: rgba(0, 0, 0, 0.25) 0rem 2.5rem 5rem -1.2rem;
 }
 
@@ -87,6 +115,15 @@ async function login() {
   display: flex;
   overflow: hidden;
   flex-direction: column;
+}
+
+.form__error {
+  width: 100%;
+  text-align: center;
+  color: var(--c-state-error);
+  font-weight: var(--font-weight-bold);
+  background-color: rgba(0, 0, 0, 0.2);
+
 }
 
 .pad-x {

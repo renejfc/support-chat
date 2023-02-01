@@ -4,6 +4,8 @@ const auth = useAuthStore()
 
 <template>
   <CoreArea>
-    <h1 @click="auth.logout">Chat</h1>
+    <h1 @click="auth.logout">
+      Chat
+    </h1>
   </CoreArea>
 </template>

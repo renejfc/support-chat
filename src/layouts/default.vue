@@ -1,9 +1,7 @@
 <template>
-  <div class="default-wrapper">
-    <main class="main-container">
-      <slot />
-    </main>
-  </div>
+  <main class="default-wrapper">
+    <slot />
+  </main>
 </template>
 
 <style scope lang="css">
@@ -14,12 +12,6 @@
     flex-direction: column;
     background-image: url('/bg-pattern.svg');
     background-color: var(--c-neutral-black);
-  }
-
-  .main-container {
-    display: flex;
-    align-self: center;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-grow: 1;

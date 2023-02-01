@@ -1,10 +1,12 @@
 <script setup lang="ts">
 defineProps<{
-  label: string
-  name: string
-  type: string
-  placeholder: string
   id: string
+  type: string
+  name: string
+  label: string
+  valid?: boolean
+  required?: boolean
+  placeholder?: string
   modelValue: string | null
 }>()
 
@@ -26,8 +28,13 @@ defineEmits<{
       :type="type"
       :name="name"
       class="form__input"
+      :class="{
+        'form__input--invalid': !valid && valid !== undefined,
+        'form__input--valid': valid,
+      }"
       :placeholder="placeholder"
       :value="modelValue"
+      :required="required"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     >
   </div>
@@ -50,15 +57,23 @@ defineEmits<{
 }
 
 .form__input {
-  border-top: 0.1rem solid var(--c-neutral-dark-gray);
-  border-bottom: 0.1rem solid var(--c-neutral-dark-gray);
-  border-right: 0.1rem solid var(--c-neutral-dark-gray);
+  border-style: solid;
+  transition: all 0.3s ease;
+  border-top-left-radius: 0;
+  border-bottom-width : 0.1rem;
   background-color: #3b4148;
   color: var(--c-neutral-gray);
-  transition: background-color 0.3s;
   border-radius: 0 1rem 1rem 0;
   border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
+  border-color: var(--c-neutral-dark-gray);
+}
+
+.form__input--invalid {
+  border-color: var(--c-state-error);
+}
+
+.form__input--valid {
+  border-color: var(--c-state-success);
 }
 
 .form__input:focus,

@@ -1,7 +1,7 @@
 <template>
-<section class="area">
-  <slot />
-</section>
+  <section class="area">
+    <slot />
+  </section>
 </template>
 
 <style scoped lang="css">

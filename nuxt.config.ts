@@ -2,8 +2,8 @@
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      apiBaseUrl: "/api",
-    }
+      apiBaseUrl: '/api',
+    },
   },
   typescript: {
     typeCheck: true,

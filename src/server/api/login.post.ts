@@ -6,12 +6,12 @@ export default eventHandler(async (event: H3Event) => {
   const { username, password } = await readBody<ISession>(event)
 
   if (username === null || password === null) {
-    sendError(event, createError({ statusCode: 400, message: 'Missing required fields' }))
+    sendError(event, createError({ statusCode: 400 }))
     return
   }
 
   if (!isValidBypassUser(username, password))
-    sendError(event, createError({ statusCode: 401, message: 'Invalid credentials' }))
+    sendError(event, createError({ statusCode: 401 }))
 
   return { session_id: generateToken() }
 })
