@@ -17,7 +17,7 @@ async function login() {
 </script>
 
 <template>
-  <section class="login-section">
+  <CoreArea>
     <form class="form" @submit.prevent="login">
       <h1 class="form__title">
         Log in with your credentials to join the chat.
@@ -58,25 +58,10 @@ async function login() {
         </CoreButton>
       </div>
     </form>
-  </section>
+  </CoreArea>
 </template>
 
 <style scoped lang="css">
-.login-section {
-  width: 80rem;
-  display: grid;
-  place-items: center;
-  height: 80rem;
-  border-radius: 3rem;
-  background-size: 150%;
-  background-position: center;
-  background-color: #2c3338;
-  background-repeat: no-repeat;
-  background-blend-mode: soft-light;
-  background-image: url('/support.png');
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-}
-
   .form {
   gap: 4rem;
   width: 50%;
@@ -117,13 +102,6 @@ async function login() {
   .form {
     height: 100%;
     box-shadow: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .login-section {
-    background-size: 100%;
-    border-radius: 0;
   }
 }
 </style>

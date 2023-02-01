@@ -13,6 +13,7 @@ export default defineNuxtConfig({
   css: [
     '~/styles/tokens/_colors.css',
     '~/styles/tokens/_typography.css',
+    '~/styles/tokens/_transitions.css',
     '~/styles/_global.css',
   ],
   imports: {
