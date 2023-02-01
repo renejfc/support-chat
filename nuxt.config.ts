@@ -5,6 +5,10 @@ export default defineNuxtConfig({
       apiBaseUrl: "/api",
     }
   },
+  typescript: {
+    typeCheck: true,
+    strict: true,
+  },
   srcDir: 'src/',
   css: [
     '~/styles/tokens/_colors.css',
