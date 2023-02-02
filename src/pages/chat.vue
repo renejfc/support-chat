@@ -1,15 +1,21 @@
 <script setup lang="ts">
+const chatListEl = ref<HTMLUListElement>()
+
 const auth = useAuthStore()
+const scroll = useScroll(chatListEl)
 
 const messages = reactive([
   { content: 'Hello! Is everything alright?', isSender: false },
 ])
 
-const chatListEl = ref<HTMLUListElement>()
+watch(messages, () => {
+  if (chatListEl.value?.scrollHeight)
+    scroll.scrollToY('bottom')
+})
 
 onMounted(() => {
-  if (chatListEl.value)
-    chatListEl.value.scrollTop = chatListEl.value?.scrollHeight
+  if (chatListEl.value?.scrollHeight)
+    scroll.scrollToY(chatListEl.value.scrollHeight)
 })
 
 function sendMessage(content: string) {
@@ -62,6 +68,20 @@ function sendMessage(content: string) {
   padding-bottom: 3rem;
   list-style-type: none;
   flex-direction: column;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: var(--c-neutral-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--c-neutral-black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--c-neutral-dark-gray);
 }
 
 @media (max-width: 480px) {
