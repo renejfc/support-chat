@@ -1,47 +1,67 @@
 <script setup lang="ts">
 const auth = useAuthStore()
+
+const messages = reactive([
+  { content: 'Hello! Is everything alright?', isSender: false },
+])
+
+const chatListEl = ref<HTMLUListElement>()
+
+onMounted(() => {
+  if (chatListEl.value)
+    chatListEl.value.scrollTop = chatListEl.value?.scrollHeight
+})
+
+function sendMessage(content: string) {
+  if (content.trim() === '')
+    return
+
+  messages.push({ content, isSender: true })
+}
 </script>
 
 <template>
   <CoreArea background="messages.png">
-    <div class="chat__container">
-      <div class="logout_btn">
+    <section class="chat__container">
+      <div class="logout__btn">
         <CoreButton variant="danger" radiusless borderless @click="auth.logout">
+          <Icon name="ri:logout-box-fill" />
           log out
-          <Icon name="ri:logout-box-r-fill" />
         </CoreButton>
       </div>
-      <section class="chat__messages">
-        <!-- asd -->
-      </section>
+      <ul ref="chatListEl" class="chat__messages">
+        <ChatMessage v-for="(message, index) in messages" :key="index" :content="message.content" :is-sender="message.isSender" />
+      </ul>
       <section class="chat__bar">
-        <ChatBar />
+        <ChatBar @send="sendMessage" />
       </section>
-    </div>
+    </section>
   </CoreArea>
 </template>
 
 <style lang="css">
 .chat__container {
+  display: flex;
   width: inherit;
   height: inherit;
-  display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   backdrop-filter: saturate(1) blur(16px);
 }
 
-.logout_btn {
-  align-self: center;
-  width: fit-content;
+.logout__btn {
+  top: 0;
+  position: fixed;
+  overflow: hidden;
+  border-bottom-right-radius: 10rem;
 }
 
 .chat__messages {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.chat__bar {
   display: flex;
+  overflow-y: auto;
+  padding-bottom: 3rem;
+  list-style-type: none;
+  flex-direction: column;
 }
 
 @media (max-width: 480px) {

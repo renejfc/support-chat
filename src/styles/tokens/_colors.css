@@ -9,7 +9,4 @@
   --c-neutral-gray: #A6A6A6;
   --c-neutral-dark-gray: #4D4D4D;
   --c-neutral-light-gray: #E5E5E5;
-
-  --c-typo-dark: var(--color-neutral-black);
-  --c-typo-light: var(--color-neutral-white);
 }

@@ -15,10 +15,11 @@ const bgUrlProp = ref(`url('/${props.background}')`)
 <style scoped lang="css">
 .area {
   width: 100%;
-  max-width: 80rem;
   display: flex;
   height: 80rem;
+  max-width: 80rem;
   border-radius: 3rem;
+  overflow-y: hidden;
   align-items: center;
   background-size: 150%;
   flex-direction: column;

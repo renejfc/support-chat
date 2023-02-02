@@ -12,15 +12,15 @@ function send() {
 </script>
 
 <template>
-  <div class="bar">
+  <form class="bar" @submit.prevent="send">
     <input v-model="content" type="text" class="bar__input" placeholder="Type your message...">
     <div class="bar__btn bar__btn--send">
-      <CoreButton fluid radiusless borderless @click="send">
+      <CoreButton fluid radiusless borderless>
         send
         <Icon name="ri:send-plane-fill" />
       </CoreButton>
     </div>
-  </div>
+  </form>
 </template>
 
 <style scoped lang="css">
@@ -29,6 +29,7 @@ function send() {
   flex-grow: 1;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .bar__input {
