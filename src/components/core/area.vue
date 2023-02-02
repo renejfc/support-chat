@@ -1,3 +1,11 @@
+<script setup lang="ts">
+const props = defineProps<{
+  background?: string
+}>()
+
+const bgUrlProp = ref(`url('/${props.background}')`)
+</script>
+
 <template>
   <section class="area">
     <slot />
@@ -6,23 +14,26 @@
 
 <style scoped lang="css">
 .area {
-  width: 80rem;
-  display: grid;
-  place-items: center;
+  width: 100%;
+  max-width: 80rem;
+  display: flex;
   height: 80rem;
   border-radius: 3rem;
+  align-items: center;
   background-size: 150%;
+  flex-direction: column;
+  justify-content: center;
   background-position: center;
   background-color: #2c3338;
   background-repeat: no-repeat;
   background-blend-mode: soft-light;
-  background-image: url('/support.png');
+  background-image: v-bind(bgUrlProp);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .area {
-    background-size: 100%;
+    background-size: 200%;
     border-radius: 0;
   }
 }

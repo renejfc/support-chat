@@ -6,14 +6,14 @@
 
 <style scope lang="css">
   .default-wrapper {
-    height: 100%;
+    height: 100vh;
+    flex-grow: 1;
     display: flex;
     overflow-x: hidden;
-    flex-direction: column;
-    background-image: url('/bg-pattern.svg');
-    background-color: var(--c-neutral-black);
-    justify-content: center;
     align-items: center;
-    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--c-neutral-black);
+    background-image: url('/bg-pattern.svg');
   }
 </style>

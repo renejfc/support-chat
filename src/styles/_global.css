@@ -35,12 +35,11 @@ html,
 body,
 #__nuxt {
   height: 100vh;
+  overflow: hidden;
+  min-height: -webkit-fill-available;
 }
 
 body {
-  /* Force vertical scrollbar to be always visible to avoid layout shift while loading the content */
-  overflow-y: scroll;
-  overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -76,9 +75,9 @@ img, picture, video, canvas, svg {
  optgroup,
  select,
  textarea {
-   font-family: inherit; /* 1 */
-   font-size: 100%; /* 1 */
-   line-height: 1.15; /* 1 */
+   font-family: inherit;
+   font-size: 100%;
+   line-height: 1.15;
    outline: 0;
    border: 0;
  }
@@ -89,7 +88,7 @@ img, picture, video, canvas, svg {
   */
  
  button,
- input { /* 1 */
+ input {
    overflow: visible;
  }
  
@@ -99,7 +98,7 @@ img, picture, video, canvas, svg {
   */
  
  button,
- select { /* 1 */
+ select {
    text-transform: none;
  }
  
@@ -121,9 +120,13 @@ p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
 
-/* ::-moz-selection {
+::-moz-selection {
+  color: var(--c-neutral-white);
+  background-color: var(--c-neutral-black);
 }
 
-::selection { 
+::selection {
+  color: var(--c-neutral-white);
+  background-color: var(--c-neutral-black);
 }
-*/
+

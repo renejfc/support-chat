@@ -7,7 +7,7 @@ defineProps<{
   valid?: boolean
   required?: boolean
   placeholder?: string
-  modelValue: string | null
+  modelValue?: string | null
 }>()
 
 defineEmits<{
@@ -43,11 +43,12 @@ defineEmits<{
 <style scoped lang="css">
 .form__field {
   display: flex;
+  flex-grow: 1;
 }
 
 .icon,
 .form__input {
-  padding: 1.5rem;
+  padding: 2rem;
 }
 
 .icon {
@@ -57,6 +58,7 @@ defineEmits<{
 }
 
 .form__input {
+  flex-grow: 1;
   border-style: solid;
   transition: all 0.3s ease;
   border-top-left-radius: 0;
