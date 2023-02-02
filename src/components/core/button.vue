@@ -65,6 +65,10 @@ withDefaults(defineProps<{
   outline-offset: 2px;
 }
 
+.btn:active {
+  transform: translateY(0.2rem) translateX(0.2rem);
+}
+
 /* Variant: primary */
 .btn--primary {
   color: var(--c-neutral-gray);
@@ -82,12 +86,19 @@ withDefaults(defineProps<{
 
 .btn--primary:active {
   background-color: var(--c-neutral-black);
-  transform: translateY(0.2rem) translateX(0.2rem);
 }
 
 /* Variant: danger */
 .btn--danger {
   color: var(--c-neutral-gray);
+  background-color: var(--c-state-error);
+}
+
+.btn--danger:hover {
+  background-color: var(--c-state-error-dark);
+}
+
+.btn--danger:active {
   background-color: var(--c-state-error);
 }
 </style>

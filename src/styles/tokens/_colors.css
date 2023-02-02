@@ -1,7 +1,8 @@
 :root {
-  --c-state-success: #69CC8B;
-  --c-state-warning: #FAB72D;
-  --c-state-error: #C00;
+  --c-state-success: #83D67B;
+  --c-state-warning: #9B6E1D;
+  --c-state-error: #990000;
+  --c-state-error-dark: #660000;
 
   --c-neutral-white: #F5F5F5;
   --c-neutral-black: #333333;
