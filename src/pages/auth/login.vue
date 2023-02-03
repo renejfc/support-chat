@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ISession } from '~~/src/types/auth.interface'
+import type { ISession } from '~/types/auth.interface'
 
 const auth = useAuthStore()
 

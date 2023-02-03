@@ -1,6 +1,6 @@
 import type { H3Event } from 'h3'
 import { v4 as uuidv4 } from 'uuid'
-import type { ISession } from '~~/src/types/auth.interface'
+import type { ISession } from '~/types/auth.interface'
 
 export default eventHandler(async (event: H3Event) => {
   const { username, password } = await readBody<ISession>(event)

@@ -46,7 +46,7 @@ export const useAuthStore = defineStore('auth', () => {
     authError.message = null
   }
 
-  return { login, logout, isLoggedIn, authError }
+  return { login, logout, isLoggedIn, authError, sessionId }
 })
 
 if (import.meta.hot)

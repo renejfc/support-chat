@@ -1,8 +1,9 @@
 <script setup lang="ts">
 const chatListEl = ref<HTMLUListElement>()
+const scroll = useScroll(chatListEl)
 
 const auth = useAuthStore()
-const scroll = useScroll(chatListEl)
+const chat = useChatStore()
 
 const messages = reactive([
   { content: 'Hello! Is everything alright?', isSender: false },
