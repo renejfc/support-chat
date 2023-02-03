@@ -7,8 +7,9 @@ export default eventHandler((event: H3Event) => {
     response: [
       {
         type: 'text',
-        text: 'Hello, world! 👋 I\'m here to help. ',
-      }],
+        text: 'Hello, world! 👋 I\'m here to help.',
+      },
+    ],
   }
 
   if (authHeader?.startsWith('Bearer '))

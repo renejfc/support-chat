@@ -13,8 +13,11 @@ export const useChatStore = defineStore('chat', () => {
       case 'bot':{
         const isLastMessageWelcome = lastMessage?.from === 'bot' && (lastMessage as IBotMessage).isWelcomeMessage
 
-        if (!isLastMessageWelcome)
-          messages.value = [...messages.value, input]
+        if (!isLastMessageWelcome) {
+          setTimeout(() => {
+            messages.value = [...messages.value, input]
+          }, 1500)
+        }
         break
       }
       case 'user':

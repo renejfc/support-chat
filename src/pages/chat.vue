@@ -54,8 +54,9 @@ onMounted(() => {
 
 .logout__btn {
   top: 0;
-  position: fixed;
+  z-index: 1;
   overflow: hidden;
+  position: absolute;
   border-bottom-right-radius: 10rem;
 }
 
