@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <main class="default-wrapper">
     <slot />

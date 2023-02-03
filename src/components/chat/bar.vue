@@ -1,19 +1,22 @@
 <script setup lang="ts">
-const emit = defineEmits<{
-  (e: 'send', content: string): void
-}>()
+const chat = useChatStore()
 
-const content = ref('')
+const message = ref('')
 
 function send() {
-  emit('send', content.value)
-  content.value = ''
+  chat.sendMessage({
+    type: 'text',
+    text: message.value,
+    from: 'user',
+  })
+
+  message.value = ''
 }
 </script>
 
 <template>
   <form class="bar" @submit.prevent="send">
-    <input v-model="content" type="text" class="bar__input" placeholder="Type your message...">
+    <input v-model="message" type="text" class="bar__input" placeholder="Type your message...">
     <div class="bar__btn bar__btn--send">
       <CoreButton fluid radiusless borderless>
         send

@@ -4,36 +4,32 @@ export const useChatStore = defineStore('chat', () => {
   const baseUrl = useRuntimeConfig().public.apiBaseUrl
   const auth = useAuthStore()
 
-  let messages = reactive<Array<IBotMessage | IUserMessage>>([])
-
-  const isTyping = ref(false)
-  const isSending = ref(false)
-  const isSendingError = ref(false)
-  const isSendingSuccess = ref(false)
+  const messages = ref<Array<IBotMessage | IUserMessage>>([])
 
   function addMessage(input: IBotMessage | IUserMessage): void {
-    const lastMessage = messages.at(-1)
+    const lastMessage = messages.value.at(-1)
 
-    if (input.from === 'bot') {
-      const isLastMessageWelcome = lastMessage?.from === 'bot' && (lastMessage as IBotMessage).isWelcomeMessage
+    switch (input.from) {
+      case 'bot':{
+        const isLastMessageWelcome = lastMessage?.from === 'bot' && (lastMessage as IBotMessage).isWelcomeMessage
 
-      if (!isLastMessageWelcome)
-        messages = [...messages, input]
-      else return
+        if (!isLastMessageWelcome)
+          messages.value = [...messages.value, input]
+        break
+      }
+      case 'user':
+        messages.value = [...messages.value, input]
+        break
+      default:
+        break
     }
-
-    messages = [...messages, input]
   }
 
   async function sendMessage(userMessage: IUserMessage): Promise<void> {
-    const isMessageEmpty = userMessage.text!.trim() === ''
+    const isMessageEmpty = userMessage.text?.trim() === ''
 
     if (isMessageEmpty)
       return
-
-    isSending.value = true
-    isSendingError.value = false
-    isSendingSuccess.value = false
 
     const { data, error } = await useFetch<IBotMessageResponse>(`${baseUrl}/sendMessage`, {
       method: 'POST',
@@ -46,21 +42,17 @@ export const useChatStore = defineStore('chat', () => {
     })
 
     if (error.value && error.value.statusCode) {
-      isSendingError.value = true
       console.error(error.value.statusCode)
       return
     }
 
-    addMessage({
-      text: userMessage.text,
-    } as IUserMessage)
+    if (!data.value)
+      return
 
     const { response } = data.value!
-
-    isSending.value = false
-    isSendingSuccess.value = true
-
     const formattedBotMessages = formatBotMessages({ rawMessages: response })
+
+    addMessage(userMessage)
     formattedBotMessages.forEach(addMessage)
   }
 
@@ -73,17 +65,22 @@ export const useChatStore = defineStore('chat', () => {
   }
 
   async function getWelcomeMessage(): Promise<void> {
-    const { data, error } = await useFetch<IBotMessageResponse>(`${baseUrl}/getWelcomeMessage`, {
+    const { data, error, refresh } = await useFetch<IBotMessageResponse>(`${baseUrl}/getWelcomeMessage`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${auth.sessionId}`,
       },
     })
 
+    refresh()
+
     if (error.value && error.value.statusCode) {
       console.error(error.value.statusCode)
       return
     }
+
+    if (!data.value)
+      return
 
     const { response } = data.value!
 
@@ -91,28 +88,25 @@ export const useChatStore = defineStore('chat', () => {
     formattedMessages.forEach(addMessage)
   }
 
-  function clearSendingStatus(): void {
-    [isSending, isSendingError, isSendingSuccess].forEach((status) => {
-      status.value = false
-    })
-  }
-
   function clearMessages(): void {
-    messages = []
+    messages.value = []
     getWelcomeMessage()
   }
 
   return {
     messages,
-    isTyping,
-    isSending,
-    isSendingError,
-    isSendingSuccess,
     sendMessage,
-    getWelcomeMessage,
-    clearSendingStatus,
     clearMessages,
+    getWelcomeMessage,
   }
+}, {
+  persist: {
+    storage: persistedState.cookiesWithOptions({
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+      path: '/chat',
+    }),
+  },
 })
 
 interface FormatBotMessagesParams {

@@ -1,7 +1,7 @@
 export interface IMessage {
   type: 'text' | 'image'
   text?: string
-  imageUrl?: string
+  url?: string
   from: 'bot' | 'user'
 }
 
@@ -10,7 +10,7 @@ export interface IBotMessage extends IMessage {
 }
 
 export interface IBotMessageResponse {
-  response: Array<Pick<IBotMessage, 'type' | 'text' | 'imageUrl'>>
+  response: Array<Pick<IBotMessage, 'type' | 'text' | 'url'>>
 }
 
 export interface IUserMessage extends IMessage {}

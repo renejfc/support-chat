@@ -5,13 +5,16 @@ const scroll = useScroll(chatListEl)
 const auth = useAuthStore()
 const chat = useChatStore()
 
-watch(chat.messages, () => {
-  if (chatListEl.value?.scrollHeight)
-    scroll.scrollToY('bottom')
-})
+watch(
+  () => chat.messages,
+  () => {
+    if (chatListEl.value?.scrollHeight)
+      scroll.scrollToY('bottom')
+  })
+
+await chat.getWelcomeMessage()
 
 onMounted(() => {
-  chat.getWelcomeMessage()
   if (chatListEl.value?.scrollHeight)
     scroll.scrollToY(chatListEl.value.scrollHeight)
 })
@@ -30,9 +33,12 @@ onMounted(() => {
         <ChatMessage v-for="(message, index) in chat.messages" :key="index" :message="message" />
       </ul>
       <section class="chat__bar">
-        <ChatBar @send="chat.sendMessage" />
+        <ChatBar />
       </section>
     </section>
+    <button class="btn__clear__hidden" @click="chat.clearMessages">
+      .
+    </button>
   </CoreArea>
 </template>
 
@@ -79,5 +85,14 @@ onMounted(() => {
   .chat__container {
     height: 100vh;
   }
+}
+
+.btn__clear__hidden {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--c-neutral-black);
 }
 </style>

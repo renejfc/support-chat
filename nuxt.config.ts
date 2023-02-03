@@ -26,6 +26,7 @@ export default defineNuxtConfig({
         autoImports: ['defineStore', 'acceptHMRUpdate', 'useStore'],
       },
     ],
+    '@pinia-plugin-persistedstate/nuxt',
     'nuxt-icon',
   ],
 })

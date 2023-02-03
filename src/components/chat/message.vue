@@ -15,11 +15,11 @@ const className = computed(() => {
 <template>
   <li class="message" :class="className">
     <span v-if="props.message.text">{{ props.message.text }}</span>
-    <img v-if="props.message.imageUrl" :src="props.message.imageUrl" alt="image provided by chatbot">
+    <img v-if="props.message.url" :src="props.message.url" alt="image provided by chatbot">
   </li>
 </template>
 
-<style>
+<style scoped lang="css">
 .message {
   margin: 1rem;
   padding: 1rem;
