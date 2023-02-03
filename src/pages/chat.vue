@@ -5,26 +5,16 @@ const scroll = useScroll(chatListEl)
 const auth = useAuthStore()
 const chat = useChatStore()
 
-const messages = reactive([
-  { content: 'Hello! Is everything alright?', isSender: false },
-])
-
-watch(messages, () => {
+watch(chat.messages, () => {
   if (chatListEl.value?.scrollHeight)
     scroll.scrollToY('bottom')
 })
 
 onMounted(() => {
+  chat.getWelcomeMessage()
   if (chatListEl.value?.scrollHeight)
     scroll.scrollToY(chatListEl.value.scrollHeight)
 })
-
-function sendMessage(content: string) {
-  if (content.trim() === '')
-    return
-
-  messages.push({ content, isSender: true })
-}
 </script>
 
 <template>
@@ -37,10 +27,10 @@ function sendMessage(content: string) {
         </CoreButton>
       </div>
       <ul ref="chatListEl" class="chat__messages">
-        <ChatMessage v-for="(message, index) in messages" :key="index" :content="message.content" :is-sender="message.isSender" />
+        <ChatMessage v-for="(message, index) in chat.messages" :key="index" :message="message" />
       </ul>
       <section class="chat__bar">
-        <ChatBar @send="sendMessage" />
+        <ChatBar @send="chat.sendMessage" />
       </section>
     </section>
   </CoreArea>

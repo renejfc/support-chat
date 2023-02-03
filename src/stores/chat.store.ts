@@ -6,7 +6,6 @@ export const useChatStore = defineStore('chat', () => {
 
   let messages = reactive<Array<IBotMessage | IUserMessage>>([])
 
-  const message = ref('')
   const isTyping = ref(false)
   const isSending = ref(false)
   const isSendingError = ref(false)
@@ -26,8 +25,10 @@ export const useChatStore = defineStore('chat', () => {
     messages = [...messages, input]
   }
 
-  async function sendMessage() {
-    if (message.value.trim() === '')
+  async function sendMessage(userMessage: IUserMessage): Promise<void> {
+    const isMessageEmpty = userMessage.text!.trim() === ''
+
+    if (isMessageEmpty)
       return
 
     isSending.value = true
@@ -40,7 +41,7 @@ export const useChatStore = defineStore('chat', () => {
         Authorization: `Bearer ${auth.sessionId}`,
       },
       body: {
-        text: message.value,
+        text: userMessage.text,
       },
     })
 
@@ -51,7 +52,7 @@ export const useChatStore = defineStore('chat', () => {
     }
 
     addMessage({
-      text: message.value,
+      text: userMessage.text,
     } as IUserMessage)
 
     const { response } = data.value!
@@ -61,8 +62,6 @@ export const useChatStore = defineStore('chat', () => {
 
     const formattedBotMessages = formatBotMessages({ rawMessages: response })
     formattedBotMessages.forEach(addMessage)
-
-    message.value = ''
   }
 
   function formatBotMessages({ rawMessages, isWelcomeMessage = false }: FormatBotMessagesParams): IBotMessage[] {
@@ -105,7 +104,6 @@ export const useChatStore = defineStore('chat', () => {
 
   return {
     messages,
-    message,
     isTyping,
     isSending,
     isSendingError,

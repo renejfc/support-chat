@@ -1,17 +1,21 @@
 <script setup lang="ts">
-const props = withDefaults(defineProps<{
-  content: string
-  isSender: boolean
-}>(), {
-  isSender: false,
-})
+import type { IBotMessage, IUserMessage } from '~/types/chat.interface'
 
-const className = computed(() => props.isSender ? 'message--sender' : 'message--other')
+const props = defineProps<{
+  message: IUserMessage | IBotMessage
+}>()
+
+const className = computed(() => {
+  if (props.message.from === 'user')
+    return 'message--user'
+  return 'message--bot'
+})
 </script>
 
 <template>
   <li class="message" :class="className">
-    {{ content }}
+    <span v-if="props.message.text">{{ props.message.text }}</span>
+    <img v-if="props.message.imageUrl" :src="props.message.imageUrl" alt="image provided by chatbot">
   </li>
 </template>
 
@@ -25,14 +29,14 @@ const className = computed(() => props.isSender ? 'message--sender' : 'message--
   word-wrap: break-word;
 }
 
-.message--sender {
-  text-align: left;
+.message--user {
+  text-align: right;
   align-self: flex-end;
   background-color: var(--c-neutral-dark-gray);
 }
 
-.message--other {
-  text-align: right;
+.message--bot {
+  text-align: left;
   align-self: flex-start;
   background-color: var(--c-neutral-black);
 }

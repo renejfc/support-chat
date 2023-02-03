@@ -7,7 +7,7 @@ export default eventHandler((event: H3Event) => {
     response: [
       {
         type: 'text',
-        text: 'Hello, world!',
+        text: 'Hello, world! I\'m here to here',
       }],
   }
 
