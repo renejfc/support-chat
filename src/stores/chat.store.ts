@@ -104,7 +104,6 @@ export const useChatStore = defineStore('chat', () => {
     storage: persistedState.cookiesWithOptions({
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
       maxAge: 1000 * 60 * 60 * 24 * 365,
-      path: '/chat',
     }),
   },
 })
