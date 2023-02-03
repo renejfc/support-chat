@@ -3,8 +3,10 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "serve": "nuxt dev -o",
     "start": "node .output/server/index.mjs",
     "lint": "eslint ./src",
+    "lint:fix": "eslint ./src",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "generate": "nuxt generate"
