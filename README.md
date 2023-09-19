@@ -1,4 +1,4 @@
-[Live demo here :)](https://support-chat-eight.vercel.app/)
+[Live demo here :)](https://support-chat-eight.vercel.app/) (credentials are admin - admin)
 
 # 🛠️ Project Setup
 ***In order to get the app running with the expected behaviour you'll need these:***
